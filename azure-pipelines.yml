@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: azure-vm
+  name: agent
 
 steps:
 - task: DotNetCoreCLI@2
