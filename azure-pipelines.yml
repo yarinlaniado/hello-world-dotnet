@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: agent
+  name: Default
 
 steps:
 - task: DotNetCoreCLI@2
