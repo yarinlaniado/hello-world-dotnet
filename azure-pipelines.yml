@@ -1,7 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 name: $(majorMinorVersion).$(semanticVersion) # $(rev:r) # NOTE: rev resets when the default retention period expires
 
 trigger:
@@ -43,4 +39,4 @@ steps:
     command: 'push'
     nuGetFeedType: 'internal'
     packagesToPush: '$(build.artifactStagingDirectory)/*.nupkg'
-    publishVstsFeed: 'yarinlaniado4'
+    publishVstsFeed: '0d81617e-ea9f-4107-aa42-b11e9eaf7cbe'
