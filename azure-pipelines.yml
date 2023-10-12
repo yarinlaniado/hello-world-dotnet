@@ -14,23 +14,3 @@ steps:
   inputs:
     command: 'build'
   displayName: 'Build Project'
-
-- script: |
-    # Increment the version number (you'll need a script for this)
-    # For example, you can use PowerShell to increment a version number
-        $version = "1.0.0" # Example version number
-        $newVersion = [Version]::new($version)
-        $newVersion.Build++
-        $newVersion.ToString()
-  displayName: 'Increment Version'
-  name: incrementVersion
-
-- script: echo "##vso[task.setvariable variable=VERSION;isOutput=true]$(incrementVersion)"
-  displayName: 'Set Version Output'
-
-#- script: |
-   # Upload the product to Azure Artifacts
-    # You'll need to configure this step based on your project and artifact repository
-    # Example: nuget push MyPackage.nupkg -Source "YourArtifactFeed" -ApiKey "YourApiKey"
-#    echo "Upload to Azure Artifacts completed."
-#  displayName: 'Upload to Azure Artifacts'
