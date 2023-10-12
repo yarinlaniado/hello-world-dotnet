@@ -2,6 +2,7 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+name: $(majorMinorVersion).$(semanticVersion) # $(rev:r) # NOTE: rev resets when the default retention period expires
 
 trigger:
 - main
@@ -9,12 +10,37 @@ trigger:
 pool:
   name: Default
 
+# pipeline variables
+variables:
+  majorMinorVersion: 1.0
+  # semanticVersion counter is automatically incremented by one in each execution of pipeline
+  # second parameter is seed value to reset to every time the referenced majorMinorVersion is changed
+  semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
+  projectName: 'HelloWorldLanaido'
+  buildConfiguration: 'Release'
 steps:
+# Build
 - task: DotNetCoreCLI@2
-- task: NuGetCommand@2
+  displayName: Build
+  inputs:
+    projects: '**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
+
+# Package
+- task: DotNetCoreCLI@2
+  displayName: 'NuGet pack'
+  inputs:
+    command: 'pack'
+    configuration: $(BuildConfiguration)
+    packagesToPack: '**/$(ProjectName)*.csproj'
+    packDirectory: '$(build.artifactStagingDirectory)'
+    versioningScheme: byBuildNumber # https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops#yaml-snippet
+
+# Publish
+- task: DotNetCoreCLI@2
+  displayName: 'Publish'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'internal'
-    publishVstsFeed: '0d81617e-ea9f-4107-aa42-b11e9eaf7cbe'
-  displayName: 'Build Project'
+    packagesToPush: '$(build.artifactStagingDirectory)/$(ProjectName)*.nupkg'
+    publishVstsFeed: 'MyPackageFeedName'
