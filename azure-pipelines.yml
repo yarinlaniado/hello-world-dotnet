@@ -52,16 +52,3 @@ steps:
     packagesToPush: '$(build.artifactStagingDirectory)/drop.*'
     publishVstsFeed: '0d81617e-ea9f-4107-aa42-b11e9eaf7cbe'
 
-- task: SendEmail@1
-  inputs:
-    To: 'yarinl464@gmail.com'
-    From: 'az58897412@gmail.com'
-    Subject: 'Pipeline status - SUCCESS'
-    Body: |
-      Hello!
-      the pipeline was finished successfully
-    BodyAsHtml: false
-    AddAttachment: false
-    SmtpServer: 'smtp.gmail.com'
-    SmtpUsername: 'az58897412@gmail.com'
-    SmtpPassword: '$(mypassword)'
