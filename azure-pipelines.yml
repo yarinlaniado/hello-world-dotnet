@@ -2,7 +2,7 @@ name: $(majorMinorVersion).$(semanticVersion) # $(rev:r) # NOTE: rev resets when
 
 
 trigger:
-- main
+- sonar
 
 pool:
   name: Default
