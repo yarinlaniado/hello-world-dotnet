@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>MyPackage</id>
+    <version>1.0.0</version>
+    <authors>My Name</authors>
+    <description>My NuGet package</description>
+  </metadata>
+  <files>
+    <file src="MyApp.dll" target="lib\net45" />
+  </files>
+</package>
