@@ -37,10 +37,12 @@ steps:
   inputs:
     pollingTimeoutSec: '30'
 
-
-# Publish specific DLL files
-- task: NuGetCommand@2
+# Package
+- task: DotNetCoreCLI@2
+  displayName: 'NuGet pack'
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.dll'
-    versioningScheme: 'off'
+    configuration: $(BuildConfiguration)
+    packagesToPack: '**/*.csproj'
+    packDirectory: '$(build.artifactStagingDirectory)'
+    versioningScheme: byBuildNumber # https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops#yaml-snippet
