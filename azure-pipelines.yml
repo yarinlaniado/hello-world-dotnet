@@ -14,8 +14,9 @@ variables:
   semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
   projectName: 'HelloWorldLanaido'
   buildConfiguration: 'Release'
+
 steps:
-    
+
 # Build
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -23,21 +24,18 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(BuildConfiguration)'
 
-# Package
-- task: DotNetCoreCLI@2
-  displayName: 'NuGet pack'
-  inputs:
-    command: 'pack'
-    configuration: $(BuildConfiguration)
-    packagesToPack: '**/*.csproj'
-    packDirectory: '$(build.artifactStagingDirectory)'
-    versioningScheme: byBuildNumber # https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops#yaml-snippet
-
 # Publish
 - task: DotNetCoreCLI@2
   displayName: 'Publish'
   inputs:
-    command: 'push'
-    nuGetFeedType: 'internal'
-    packagesToPush: '$(build.artifactStagingDirectory)/*.nupkg'
-    publishVstsFeed: '0d81617e-ea9f-4107-aa42-b11e9eaf7cbe'
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+
+# Publish Artifact
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: '$(projectName)-$(semanticVersion)'
