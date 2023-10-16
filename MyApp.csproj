@@ -5,7 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>HelloWorldLaniado</PackageId>
+    <PackageId>sonar</PackageId>
     <Version>1.0.0</Version>
     <Description>This is a hello world .net project for my studies @ InfinityLabs
 </Description>
