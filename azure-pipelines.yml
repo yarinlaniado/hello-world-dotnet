@@ -38,21 +38,9 @@ steps:
     pollingTimeoutSec: '30'
 
 
-# Package
-- task: DotNetCoreCLI@2
-  displayName: 'NuGet pack'
+# Publish specific DLL files
+- task: NuGetCommand@2
   inputs:
     command: 'pack'
-    configuration: $(BuildConfiguration)
-    packagesToPack: '**/*.csproj'
-    packDirectory: '$(build.artifactStagingDirectory)'
-    versioningScheme: byBuildNumber # https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops#yaml-snippet
-
-# Publish
-- task: DotNetCoreCLI@2
-  displayName: 'Publish'
-  inputs:
-    command: 'push'
-    nuGetFeedType: 'internal'
-    packagesToPush: '$(build.artifactStagingDirectory)/*.nupkg'
-    publishVstsFeed: '0d81617e-ea9f-4107-aa42-b11e9eaf7cbe'
+    packagesToPack: '**/*.dll'
+    versioningScheme: 'off'
