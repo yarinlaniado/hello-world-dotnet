@@ -34,6 +34,7 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: true
+    publishVstsFeed: '0d81617e-ea9f-4107-aa42-b11e9eaf7cbe'
 
 # Publish Artifact
 - task: PublishBuildArtifacts@1
@@ -41,3 +42,12 @@ steps:
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
+
+# Publish
+- task: DotNetCoreCLI@2
+  displayName: 'Publish'
+  inputs:
+    command: 'push'
+    nuGetFeedType: 'internal'
+    packagesToPush: '$(build.artifactStagingDirectory)/*.nupkg'
+    publishVstsFeed: '0d81617e-ea9f-4107-aa42-b11e9eaf7cbe'
