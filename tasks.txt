@@ -1,0 +1,22 @@
+I need to:
+
+- prepare a sonarqube server and connect it in azure devops:
+ * new azure vm with
+	+ docker installed
+	+ sonarqube image pulled and binded to port 9000
+	+ open port
+ * Run SonarQube scan on the project + integrate with azure devops
+
+- Create NuGet file from the DLL, and upload it to Artifacts. 
+(Use the correct repo type)
+ * ???
+
+- Using tag, the name of the artifact should be <branch_name>_<version>.
+ Print the version number to the console.
+ * ???
+
+-  Send an e-mail with the status of the pipeline (success or failure).
+ * implement integration with azure devops and sending (smtp server) 
+   and sending mail in azure
+
+
