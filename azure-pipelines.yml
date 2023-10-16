@@ -23,6 +23,12 @@ steps:
     projectKey: 'hello-world_hello-world_AYs4Ah6Xg3xAKWyd85Fc'
     projectName: 'helloworld'
     
+# Build
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: '**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
 - task: SonarQubeAnalyze@5
   inputs:
     jdkversion: 'JAVA_HOME_11_X64'
@@ -30,12 +36,7 @@ steps:
 - task: SonarQubePublish@5
   inputs:
     pollingTimeoutSec: '30'
-# Build
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    projects: '**/*.csproj'
-    arguments: '--configuration $(BuildConfiguration)'
+
 
 # Package
 - task: DotNetCoreCLI@2
