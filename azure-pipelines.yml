@@ -1,5 +1,6 @@
 name: $(majorMinorVersion).$(semanticVersion) # $(rev:r) # NOTE: rev resets when the default retention period expires
 
+
 trigger:
 - main
 
@@ -15,6 +16,20 @@ variables:
   projectName: 'HelloWorldLanaido'
   buildConfiguration: 'Release'
 steps:
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'sonarqube'
+    scannerMode: 'MSBuild'
+    projectKey: 'hello-world_hello-world_AYs4Ah6Xg3xAKWyd85Fc'
+    projectName: 'helloworld'
+    
+- task: SonarQubeAnalyze@5
+  inputs:
+    jdkversion: 'JAVA_HOME_11_X64'
+
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '30'
 # Build
 - task: DotNetCoreCLI@2
   displayName: Build
