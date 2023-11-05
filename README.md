@@ -67,3 +67,6 @@ The conditioned pipeline performs the following actions:
 5. Package Project as NuGet Package - sonar_1.0.X
 6. Publish NuGet Packages
 7. Send Email Notification - Azure devops organization feature
+
+   
+* In both pipelines I used Azure pipeline syntax to help me configure properly and implement my needed functionality to my project.
