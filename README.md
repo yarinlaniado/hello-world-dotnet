@@ -23,6 +23,7 @@ This readme document provides an overview of the Azure DevOps pipeline used in t
 6. Agent VMs: Two Azure VMs were created, one for running the pipelines and another for SonarQube. These VMs were configured to connect to Azure organizations and set up as pipeline agents.
 
 7. VM Setup: On the agent VM, Docker, .NET SDK, and NuGet were installed to create C# images and push them to Docker Hub.
+8.  A feed is created to store the c# artifacts.
 
 
 ## Pipeline Configuration
