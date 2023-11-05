@@ -1,0 +1,12 @@
+Hello X,
+
+Here is the overview of the home assignment , which involves setting up Azure Devops pipeline,I created a .NET "Hello world" project,
+set up a CI/CD pipeline for Azure Artifacts, and added a conditional pipeline with SonarQube scanning, NuGet packaging, and email
+notifications for status updates.
+For more information about the execution of the task, please refer to the md file called “readme.md” on GITHUB:
+https://github.com/yarinlaniado/hello-world-dotnet
+
+
+Best regards,
+
+Yarin Laniado.
